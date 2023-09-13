@@ -90,6 +90,7 @@ class BAlellePlot(QWidget):
 
     def browse_snp_cc(self):
         self.snp_cc_file_path, _ = QFileDialog.getOpenFileName(self, 'Select SNP Call Contrasts Positions file', os.path.curdir, '*.txt')
+        # prvo provjeri ima li file name, ako nema nista
         with open(self.snp_cc_file_path) as f:
             lines = f.readlines()
         tabs, letabs = [], []

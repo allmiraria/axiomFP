@@ -20,7 +20,7 @@ class MyProxyStyle(QProxyStyle):
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setWindowFlags(Qt.WindowStaysOnTopHint | Qt.CustomizeWindowHint)
+        self.setWindowFlags(Qt.WindowStaysOnTopHint)
         self.setFixedSize(variables.window_w, variables.window_h)
         self.window_gui()
 
