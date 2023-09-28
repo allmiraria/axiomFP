@@ -17,15 +17,14 @@ Step 1. This step involves preparing the input files in the Axiome Analysis Suit
   Click OK and wait for the advanced metrics to calculate
   Click show/hide columns
   Tick AA.meanX, AAvarX, AB.meanX, BB.meanX, and BB.varX, and n_NC
-
-Click export -> current table and save the file
-This is the "SNP statistics file" (UPISATI EKSTENZIJU)
-
-Click export -> genotyping data
-Tick "Signal"
-Untick everything in "Select Probeset Data Columns to Include" and "Select Annotation Column(s) to Add"
-Save the file
-This is the "SNP call contrast positions file"  (UPISATI EKSTENZIJU)
+  Click export -> current table and save the file
+  This is the "SNP statistics file" (UPISATI EKSTENZIJU)
+  
+  Click export -> genotyping data
+  Tick "Signal"
+  Untick everything in "Select Probeset Data Columns to Include" and "Select Annotation Column(s) to Add"
+  Save the file
+  This is the "SNP call contrast positions file"  (UPISATI EKSTENZIJU)
 
 Step 2. 
 
