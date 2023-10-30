@@ -23,8 +23,8 @@ _This step involves preparing the input files in the Axiome Analysis Suite  Soft
 _This is the **"SNP statistics file"** (UPISATI EKSTENZIJU)_
 * Click export -> genotyping data
 * Tick "Signal"
-* Untick everything in "Select Probeset Data Columns to Include" and "Select Annotation Column(s) to Add"
-* Save the file
+* Untick everything in "Select Probeset Data Columns to Include" and "Select Annotation Column(s) to Add" 
+* Save the file $${\color{lightblue}Probam \space nesto}$$
 _This is the **"SNP call contrast positions file"**  (UPISATI EKSTENZIJU)_
 
 ## Step 2. 
