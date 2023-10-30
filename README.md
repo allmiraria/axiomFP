@@ -1,6 +1,7 @@
 # b_allele_plot
 A software for generating b allele plots from Axiom data.
-(Requires input files generated in Axiom Analysis Suite Software) 
+
+_(Requires input files generated in Axiom Analysis Suite Software)_
 
 # what's new
 New...
