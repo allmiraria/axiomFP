@@ -31,3 +31,5 @@ _This is the **"SNP call contrast positions file"**  (UPISATI EKSTENZIJU)_
 _This step explains how to use the software to create **b-allele plots**_
 Use the "SNP statistics file" and "SNP call contrast positions file" as input ... 
 .. ovo cu znat kad Mirza naklika softver
+
+$${\color{white}White}$$ nesto
