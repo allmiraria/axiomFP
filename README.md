@@ -9,7 +9,7 @@ New...
 Visit www.motherlandia.org for details.
 
 ## Step 1. 
-### This step involves preparing the input files in the Axiome Analysis Suite  Software.
+_This step involves preparing the input files in the Axiome Analysis Suite  Software._
 
 Run a new Genotyping project - make the cr-cutoff arbitrarily low
 
@@ -29,7 +29,7 @@ Tick AA.meanX, AAvarX, AB.meanX, BB.meanX, and BB.varX, and n_NC
 
 Click export -> current table and save the file
 
-This is the "SNP statistics file" (UPISATI EKSTENZIJU)
+This is the **"SNP statistics file"** (UPISATI EKSTENZIJU)
   
 Click export -> genotyping data
 
@@ -39,7 +39,7 @@ Untick everything in "Select Probeset Data Columns to Include" and "Select Annot
 
 Save the file
 
-This is the "SNP call contrast positions file"  (UPISATI EKSTENZIJU)
+This is the **"SNP call contrast positions file"**  (UPISATI EKSTENZIJU)
 
 ## Step 2. 
 
