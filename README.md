@@ -20,18 +20,17 @@ _This step involves preparing the input files in the Axiome Analysis Suite  Soft
 * Click show/hide columns
 * Tick AA.meanX, AAvarX, AB.meanX, BB.meanX, and BB.varX, and n_NC
 * Click export -> current table and save the file
-_This is the **"SNP statistics file"** (UPISATI EKSTENZIJU)_
+
+_This is the_
+$\color{lightgreen}{SNP\ statistics\ file\ .txt}$
+
 * Click export -> genotyping data
 * Tick "Signal"
 * Untick everything in "Select Probeset Data Columns to Include" and "Select Annotation Column(s) to Add" 
 * Save the file
-_This is the **"SNP call contrast positions file"**  (UPISATI EKSTENZIJU)_
 
-$\mathbb{\color{cyan}{SNP \ statistics \ file}}$
-
-$\color{green}{test}$
-
-<span style="color: lightgreen;">Your text goes here</span>
+_This is the_
+$\color{lightgreen}{SNP\ call\ contrast\ positions\ file\ .txt}$
 
 ## Step 2. 
 _This step explains how to use the software to create **b-allele plots**_
