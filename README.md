@@ -6,7 +6,7 @@ A software for generating b allele plots from Axiom data.
 New...
 
 # how to use
-Visit www.motherlandia.org for details.
+Visit _www.motherlandia.org_ for details.
 
 ## Step 1. 
 _This step involves preparing the input files in the Axiome Analysis Suite  Software._
