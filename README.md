@@ -10,35 +10,35 @@ Visit www.motherlandia.org for details.
 
 Step 1. This step involves preparing the input files in the Axiome Analysis Suite  Software.
 
-  Run a new Genotyping project - make the cr-cutoff arbitrarily low
+    Run a new Genotyping project - make the cr-cutoff arbitrarily low
 
-  Select ProbeSet Summary Table
+    Select ProbeSet Summary Table
 
-  Select "Reanalyze"
+    Select "Reanalyze"
 
-  Select "Regenerate SNP Metrics"
-
-  Tick the box for "Generate advanced metrics
-
-  Click OK and wait for the advanced metrics to calculate
-
-  Click show/hide columns
-
-  Tick AA.meanX, AAvarX, AB.meanX, BB.meanX, and BB.varX, and n_NC
-
-  Click export -> current table and save the file
-
-  This is the "SNP statistics file" (UPISATI EKSTENZIJU)
+    Select "Regenerate SNP Metrics"
   
-  Click export -> genotyping data
+    Tick the box for "Generate advanced metrics
 
-  Tick "Signal"
+    Click OK and wait for the advanced metrics to calculate
 
-  Untick everything in "Select Probeset Data Columns to Include" and "Select Annotation Column(s) to Add"
+    Click show/hide columns
 
-  Save the file
+    Tick AA.meanX, AAvarX, AB.meanX, BB.meanX, and BB.varX, and n_NC
 
-  This is the "SNP call contrast positions file"  (UPISATI EKSTENZIJU)
+    Click export -> current table and save the file
+
+    This is the "SNP statistics file" (UPISATI EKSTENZIJU)
+  
+    Click export -> genotyping data
+
+    Tick "Signal"
+
+    Untick everything in "Select Probeset Data Columns to Include" and "Select Annotation Column(s) to Add"
+
+    Save the file
+
+    This is the "SNP call contrast positions file"  (UPISATI EKSTENZIJU)
 
 Step 2. 
 
