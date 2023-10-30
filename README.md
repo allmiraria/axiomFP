@@ -8,7 +8,7 @@ New...
 # how to use
 Visit www.motherlandia.org for details.
 
-Step 1. This step involves preparing the input files in the Axiome Analysis Suite  Software.
+## Step 1. This step involves preparing the input files in the Axiome Analysis Suite  Software.
 
 Run a new Genotyping project - make the cr-cutoff arbitrarily low
 
@@ -34,13 +34,13 @@ Click export -> genotyping data
 
 Tick "Signal"
 
-    Untick everything in "Select Probeset Data Columns to Include" and "Select Annotation Column(s) to Add"
+Untick everything in "Select Probeset Data Columns to Include" and "Select Annotation Column(s) to Add"
 
-    Save the file
+Save the file
 
-    This is the "SNP call contrast positions file"  (UPISATI EKSTENZIJU)
+This is the "SNP call contrast positions file"  (UPISATI EKSTENZIJU)
 
-Step 2. 
+## Step 2. 
 
 Use the "SNP statistics file" and "SNP call contrast positions file" as input ... 
 .. ovo cu znat kad Mirza naklika softver
