@@ -12,13 +12,9 @@ Visit www.motherlandia.org for details.
 _This step involves preparing the input files in the Axiome Analysis Suite  Software._
 
 * Run a new Genotyping project - make the cr-cutoff arbitrarily low
-
 * Select ProbeSet Summary Table
-
 * Select "Reanalyze"
-
 * Select "Regenerate SNP Metrics"
-  
 * Tick the box for "Generate advanced metrics
 
 * Click OK and wait for the advanced metrics to calculate
