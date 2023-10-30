@@ -21,7 +21,7 @@ _This step involves preparing the input files in the Axiome Analysis Suite  Soft
 * Tick AA.meanX, AAvarX, AB.meanX, BB.meanX, and BB.varX, and n_NC
 * Click export -> current table and save the file
 
-_This is the_
+> _This is the_
 $\color{lightgreen}{SNP\ statistics\ file\ .txt}$
 
 * Click export -> genotyping data
@@ -29,7 +29,7 @@ $\color{lightgreen}{SNP\ statistics\ file\ .txt}$
 * Untick everything in "Select Probeset Data Columns to Include" and "Select Annotation Column(s) to Add" 
 * Save the file
 
-_This is the_
+> _This is the_
 $\color{lightgreen}{SNP\ call\ contrast\ positions\ file\ .txt}$
 
 ## Step 2. 
