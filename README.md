@@ -27,7 +27,7 @@ _This is the **"SNP statistics file"** (UPISATI EKSTENZIJU)_
 * Save the file
 _This is the **"SNP call contrast positions file"**  (UPISATI EKSTENZIJU)_
 
-$\mathcal{\color{cyan}{SNP \ statistics \ file} \ \color{cyan}{in \ another \ font}}$
+$\mathbb{\color{cyan}{SNP \ statistics \ file}}}$
 
 ## Step 2. 
 _This step explains how to use the software to create **b-allele plots**_
