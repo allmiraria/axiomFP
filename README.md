@@ -25,7 +25,6 @@ _This is the **"SNP statistics file"** (UPISATI EKSTENZIJU)_
 * Tick "Signal"
 * Untick everything in "Select Probeset Data Columns to Include" and "Select Annotation Column(s) to Add" 
 * Save the file
-* {\color{lightblue}Probam \space nesto}
 _This is the **"SNP call contrast positions file"**  (UPISATI EKSTENZIJU)_
 
 ## Step 2. 
