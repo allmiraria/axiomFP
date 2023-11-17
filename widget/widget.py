@@ -1,12 +1,29 @@
 import sys, os, datetime
+from time import sleep
 from PyQt5.QtWidgets import QHBoxLayout, QGridLayout, QGroupBox, QLabel, QPushButton, QFileDialog, QTextEdit, QMessageBox, QWidget, QApplication
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QTextCursor
+from PyQt5 import QtCore, QtGui
 from plambases import variables
+
+class Worker(QtCore.QObject):
+    progressed = QtCore.pyqtSignal(int)
+    messaged = QtCore.pyqtSignal(str)
+    finished = QtCore.pyqtSignal()
+
+    def run(self):
+        for i in range(1, 11):
+            self.progressed.emit(int(i*10))
+            self.messaged.emit(str(i))
+            sleep(0.5)
+
+        self.finished.emit()
+
 
 class BAlellePlot(QWidget):
     def __init__(self):
         super().__init__()
+        self.__thread = QtCore.QThread()
         self.window_gui()
         self.status_update(message=variables.welcome_message)
 

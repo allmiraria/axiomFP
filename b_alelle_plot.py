@@ -2,7 +2,9 @@
 import sys, os
 from PyQt5.QtCore import QUrl
 from PyQt5.QtWidgets import QProxyStyle, QStyle, QToolTip, QAction, QMainWindow, QApplication, QDesktopWidget, QMenu
-from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QStatusBar, QProgressBar, QPushButton, QVBoxLayout, QWidget, QFileDialog, QLabel, QSizePolicy, QSizePolicy
+from PyQt5.QtCore import Qt, QThread, pyqtSignal
+import pandas
 from PyQt5.QtGui import QIcon, QDesktopServices, QTextCursor
 # b_alelle_plot imports
 from plambases import variables
@@ -17,10 +19,28 @@ class MyProxyStyle(QProxyStyle):
         else:
             return QProxyStyle.pixelMetric(self, QStyle_PixelMetric, option, widget)
 
+class LoadSTATFileThread(QThread):
+    progress_updated = pyqtSignal(int)
+    finished_loading = pyqtSignal(pandas.DataFrame)
+
+    def __init__(self, file_path):
+        super().__init__()
+        self.file_path = file_path
+
+    def run(self):
+        df = pandas.read_csv(self.file_path)
+
+        total_rows = len(df)
+        step = total_rows // 10
+        for i in range(0, total_rows, step):
+            self.progress_updated.emit(i)
+
+        self.finished_loading.emit(df)
+        MainWindow.statusBar().showMessage('Učitao')
+
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setWindowFlags(Qt.WindowStaysOnTopHint)
         self.setFixedSize(variables.window_w, variables.window_h)
         self.window_gui()
 
@@ -29,8 +49,27 @@ class MainWindow(QMainWindow):
         self.setWindowTitle('b alelle plot - working beta')
         self.fileMenu()
         self.center_gui()
-        self.central_widget = BAlellePlot()
-        self.setCentralWidget(self.central_widget)
+
+        self.statusBar().showMessage('Ready')
+        self.progressBar = QProgressBar()
+        #self.progressBar.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+        self.statusBar().addPermanentWidget(self.progressBar)
+
+        central_widget = QWidget(self)
+        self.setCentralWidget(central_widget)
+        
+        layout = QVBoxLayout()
+
+        
+
+        self.load_button = QPushButton("Load File", self)
+        self.load_button.clicked.connect(self.load_file)
+
+        layout.addWidget(self.load_button)
+        #layout.addWidget(self.status_bar)
+
+        central_widget.setLayout(layout)
+
         self.show()
 
     def center_gui(self):
@@ -90,6 +129,34 @@ class MainWindow(QMainWindow):
 
     def manual_window(self):
         QDesktopServices.openUrl(QUrl(variables.youtube_link))
+
+    def load_file(self):
+        file_dialog = QFileDialog()
+        file_path, _ = file_dialog.getOpenFileName(self, "Open CSV File", "", "CSV Files (*.csv);;All Files (*)")
+
+        if file_path:
+            self.load_data(file_path)
+
+    def load_data(self, file_path):
+        self.worker_thread = LoadSTATFileThread(file_path)
+        self.worker_thread.progress_updated.connect(self.update_progress)
+        self.worker_thread.finished_loading.connect(self.handle_finished_loading)
+
+        self.progressBar.setValue(0)
+        self.worker_thread.start()
+
+    def update_progress(self, value):
+        self.progressBar.setValue(value)
+
+    def handle_finished_loading(self, data_frame):
+        # Do something with the loaded data, e.g., display it in a table
+        print("Data loaded successfully!")
+        print(data_frame.head())
+
+        # Clean up the worker thread
+        self.worker_thread.quit()
+        self.worker_thread.wait()
+
 
 if __name__ == '__main__':
     mainApplication = QApplication(sys.argv)
