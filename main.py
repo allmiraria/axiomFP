@@ -8,6 +8,7 @@ parser.add_argument('output_folder', type=str, help='Output folder for histogram
 args = parser.parse_args()
 
 # b_alelle_plot intro:
+os.system('cls' if os.name == 'nt' else 'clear')
 typer.secho('b_alelle_plot')
 
 # Loading files:
