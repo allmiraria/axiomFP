@@ -1,46 +1,37 @@
-from pathlib import Path
-import pandas, typer
-import tqdm.auto
-import matplotlib.pyplot as plt
+import os, sys, pathlib, pandas, typer, argparse, tqdm.auto, matplotlib.pyplot as plt
 
+# Argument parsing:
+parser = argparse.ArgumentParser(description='Argument parser for b_alelle_plot. Pa tu metneš još opisa.')
+parser.add_argument('snp_stat', type=str, help='SNP Statistics file, pa ga opišeš...')
+parser.add_argument('snp_ccp', type=str, help='SNP Call Contrast Positions file, pa ga opišeš...')
+parser.add_argument('output_folder', type=str, help='Output folder for histograms.')
+args = parser.parse_args()
 
-# input
-path_to_snp_statistics = 'input/SNP_statistics_file.txt'
-path_to_snp_call_contrast_positions = 'input/SNP_call_contrast_positions_file.txt'
-chunksize = 10000
-output_directory = 'histograms'
-columns_to_remove = ['n_NC', 'AA.meanX', 'AA.varX', 'AB.meanX', 'BB.meanX', 'BB.varX', 'AA-BB', 'probeset_id']
+# b_alelle_plot intro:
+typer.secho('b_alelle_plot')
 
-# loading files
-snp_statistics_txt = Path(path_to_snp_statistics).resolve()
-snp_call_contrast_positions_txt = Path(path_to_snp_call_contrast_positions).resolve()
-snp_statistics_length = sum(1 for row in open(snp_statistics_txt, 'r'))
-snp_call_contrast_positions_length = sum(1 for row in open(snp_call_contrast_positions_txt, 'r'))
+# Loading files:
+typer.secho('Loading files...')
+
+typer.secho(f'Reading file: {pathlib.Path(args.snp_stat).resolve()}', fg=typer.colors.GREEN)
 snp_statistics_df = pandas.DataFrame()
-snp_call_contrast_positions_df = pandas.DataFrame()
-
-    # snp_statistics
-typer.secho(f"Reading file: {snp_statistics_txt}", fg="red", bold=True)
-typer.secho(f"total rows: {snp_statistics_length}", fg="green", bold=True)
-with tqdm.auto.tqdm(total=snp_statistics_length, desc="chunks read: ") as bar:
-    for i, chunk in enumerate(pandas.read_csv(snp_statistics_txt, delimiter='\t', header=0, chunksize=chunksize, low_memory=False)):
+with tqdm.auto.tqdm(total=sum(1 for row in open(pathlib.Path(args.snp_stat).resolve(), 'r')), desc=str(pathlib.Path(args.snp_stat).resolve()).split('/')[-1]) as bar:
+    for i, chunk in enumerate(pandas.read_csv(pathlib.Path(args.snp_stat).resolve(), delimiter='\t', header=0, chunksize=5000, low_memory=False)):
         snp_statistics_df = snp_statistics_df._append(other=chunk)
-        bar.update(chunksize)
-typer.secho("end of reading chunks...", fg=typer.colors.BRIGHT_RED)
-typer.secho(f"Dataframe length:{len(snp_statistics_df)}", fg="green", bold=True)
+        bar.update(5000)
+typer.secho('Done.', fg=typer.colors.GREEN)
 
-    # snp_statistics
-typer.secho(f"Reading file: {snp_call_contrast_positions_txt}", fg="red", bold=True)
-typer.secho(f"total rows: {snp_call_contrast_positions_length}", fg="green", bold=True)
-with tqdm.auto.tqdm(total=snp_call_contrast_positions_length, desc="chunks read: ") as bar:
-    for i, chunk in enumerate(pandas.read_csv(snp_call_contrast_positions_txt, delimiter='\t', skiprows=5, header=0, chunksize=chunksize, low_memory=False)):
+typer.secho(f'Reading file: {pathlib.Path(args.snp_ccp).resolve()}', fg=typer.colors.GREEN)
+snp_call_contrast_positions_df = pandas.DataFrame()
+with tqdm.auto.tqdm(total=sum(1 for row in open(pathlib.Path(args.snp_ccp).resolve(), 'r')), desc=str(pathlib.Path(args.snp_ccp).resolve()).split('/')[-1]) as bar:
+    for i, chunk in enumerate(pandas.read_csv(pathlib.Path(args.snp_ccp).resolve(), delimiter='\t', skiprows=5, header=0, chunksize=5000, low_memory=False)):
         snp_call_contrast_positions_df = snp_call_contrast_positions_df._append(other=chunk)
-        bar.update(chunksize)
-typer.secho("end of reading chunks...", fg=typer.colors.BRIGHT_RED)
-typer.secho(f"Dataframe length:{len(snp_call_contrast_positions_df)}", fg="green", bold=True)
+        bar.update(5000)
+typer.secho('Done.', fg=typer.colors.GREEN)
 
-# hue
-for column_name in tqdm.auto.tqdm(snp_call_contrast_positions_df.columns, desc='Removing columns:'):
+# Filtering:
+typer.secho('Removing and renaming columns.', fg=typer.colors.GREEN)
+for column_name in tqdm.auto.tqdm(snp_call_contrast_positions_df.columns, desc='Removing columns'):
     if column_name == 'probeset_id':
         pass
     else:
@@ -49,46 +40,36 @@ for column_name in tqdm.auto.tqdm(snp_call_contrast_positions_df.columns, desc='
             snp_call_contrast_positions_df.rename(columns={column_name: name_list[0]}, inplace=True)
         else:
             snp_call_contrast_positions_df.drop(column_name, axis=1, inplace=True)
-
-# merging dataframes
 demo_df = pandas.merge(snp_call_contrast_positions_df, snp_statistics_df, on=['probeset_id'], how='inner')
-
-
-# removing rows with nnc<20
-for index, row in tqdm.auto.tqdm(demo_df.iterrows(), total=demo_df.shape[0], desc='Removing rows:'):
+typer.secho('Removing rows where n_NC > 20.', fg=typer.colors.GREEN)
+for index, row in tqdm.auto.tqdm(demo_df.iterrows(), total=demo_df.shape[0], desc='Removing rows'):
     if row['n_NC'] >= 20:
         demo_df.drop(index, inplace=True)
 demo_df.reset_index(drop=True, inplace=True)
-
-# kalkulacija
 aa_meanx_min_value = demo_df['AA.meanX'].min()
 bb_meanx_min_value = demo_df['BB.meanX'].min()
 aa_meanx_max_value = demo_df['AA.meanX'].max()
 bb_meanx_max_value = demo_df['BB.meanX'].max()
 aa_meanx_delta = abs(aa_meanx_max_value) - aa_meanx_min_value
 bb_meanx_delta = abs(bb_meanx_max_value) - bb_meanx_min_value
-
 aa_bb = (aa_meanx_delta + bb_meanx_delta) / 2
-
-# calculating aa-bb
-for index, row in tqdm.auto.tqdm(demo_df.iterrows(), total=demo_df.shape[0], desc='Calculating AA-BB column:'):
+typer.secho('Calculating AA.meanX and BB.meanX difference.', fg=typer.colors.GREEN)
+for index, row in tqdm.auto.tqdm(demo_df.iterrows(), total=demo_df.shape[0], desc='Calculating AA-BB column'):
     demo_df.at[index, 'AA-BB'] = demo_df.at[index, 'AA.meanX'] - demo_df.at[index, 'BB.meanX']
-
 demo_filtered_df = pandas.DataFrame(columns=demo_df.columns)
-for index, row in tqdm.auto.tqdm(demo_df.iterrows(), total=demo_df.shape[0], desc='Removing AA-BB < aa-bb:'):
+typer.secho('Removing rows where AA.meanX and BB.meanX difference is smaller than average...', fg=typer.colors.GREEN)
+for index, row in tqdm.auto.tqdm(demo_df.iterrows(), total=demo_df.shape[0], desc='Removing AA-BB < aa-bb'):
     if row['AA-BB'] > aa_bb:
         demo_filtered_df.loc[len(demo_filtered_df)] = row
-
-demo_filtered_df.drop(columns=columns_to_remove, inplace=True)
-
-import os
-os.makedirs(output_directory, exist_ok=True)
-for column in tqdm.auto.tqdm(demo_filtered_df.columns, desc='Removing columns:'):
+demo_filtered_df.drop(columns=['n_NC', 'AA.meanX', 'AA.varX', 'AB.meanX', 'BB.meanX', 'BB.varX', 'AA-BB', 'probeset_id'], inplace=True)
+os.makedirs(args.output_folder, exist_ok=True)
+typer.secho('Generating column histograms.', fg=typer.colors.GREEN)
+for column in tqdm.auto.tqdm(demo_filtered_df.columns, desc='Generating histograms'):
     plt.hist(demo_filtered_df[column], bins=160, edgecolor='black')
     plt.xlabel(column)
     plt.ylabel('Frequency')
     plt.title(f'Histogram for {column}')
-    output_file_path = os.path.join(output_directory, f'{column}_histogram.png')
+    output_file_path = os.path.join(args.output_folder, f'{column}_histogram.png')
     plt.savefig(output_file_path, bbox_inches='tight')
     #plt.show()
     plt.clf()
