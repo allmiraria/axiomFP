@@ -29,7 +29,7 @@ with tqdm.auto.tqdm(total=sum(1 for row in open(pathlib.Path(args.snp_ccp).resol
         bar.update(5000)
 typer.secho('Done.', fg=typer.colors.GREEN)
 
-# Filtering:
+# Filtering and histograms:
 typer.secho('Removing and renaming columns.', fg=typer.colors.GREEN)
 for column_name in tqdm.auto.tqdm(snp_call_contrast_positions_df.columns, desc='Removing columns'):
     if column_name == 'probeset_id':
@@ -71,6 +71,5 @@ for column in tqdm.auto.tqdm(demo_filtered_df.columns, desc='Generating histogra
     plt.title(f'Histogram for {column}')
     output_file_path = os.path.join(args.output_folder, f'{column}_histogram.png')
     plt.savefig(output_file_path, bbox_inches='tight')
-    #plt.show()
     plt.clf()
 plt.close('all')
