@@ -22,20 +22,36 @@ _This step involves preparing the input files in the Axiome Analysis Suite  Soft
 * Tick AA.meanX, AAvarX, AB.meanX, BB.meanX, and BB.varX, and n_NC
 * Click export -> current table and save the file
 
-> _This is the_
-$\color{lightgreen}{SNP\ statistics\ file\ .txt}$
+> _This is the SNP_statistics_file.txt_
 
 * Click export -> genotyping data
 * Tick "Signal"
 * Untick everything in "Select Probeset Data Columns to Include" and "Select Annotation Column(s) to Add" 
 * Save the file
 
-> _This is the_
-$\color{lightgreen}{SNP\ call\ contrast\ positions\ file\ .txt}$
+> _This is the SNP_call_contrast_positions_file.txt_
 
 ## Step 2. 
 _This step explains how to use the software to create **b-allele plots**_
-Use the "SNP statistics file" and "SNP call contrast positions file" as input ... 
-.. ovo cu znat kad Mirza naklika softver
+
+Clone a git repository to a desired folder 
+
+` git clone https://github.com/dunchained/b_allele_plot.git B allele plot`
+
+Change directory to the created folder
+ 
+`cd B allele plot`
+
+This is how to run the software.
+
+"output" is the name of the newly generated folder that contains b allele plots :)
+
+`python main.py SNP_statistics_file.txt SNP_call_contrast_positions_file.txt output`
+
+For help run:
+
+`python main.py -h`
+
+
 
 
