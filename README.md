@@ -36,7 +36,7 @@ _This step explains how to use the software to create **b-allele plots**_
 
 Clone a git repository to a desired folder 
 
-` git clone https://github.com/dunchained/b_allele_plot.git B allele plot`
+`git clone https://github.com/dunchained/b_allele_plot.git B allele plot`
 
 Change directory to the created folder
  
