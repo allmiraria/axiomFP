@@ -12,7 +12,7 @@ Visit _www.motherlandia.org_ for details.
 ## Step 1. 
 _This step involves preparing the input files in the Axiome Analysis Suite  Software._
 
-* In Axiome ANalysis Suite, upload the files you want to test. Make the cr-cutoff arbitrarily low. Run a new Genotyping project.
+* In Axiome ANalysis Suite, start New Analysis, upload the files you want to test. Make the cr-cutoff arbitrarily low. Run a new Genotyping project.
 * Select ProbeSet Summary Table
 * Select "Reanalyze"
 * Select "Regenerate SNP Metrics"
