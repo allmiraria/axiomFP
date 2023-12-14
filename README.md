@@ -11,6 +11,7 @@ Visit _www.motherlandia.org_ for details.
 
 ## Step 1. 
 _This step involves preparing the input files in the Axiome Analysis Suite  Software._
+_In case you haven't used Axiom Analysis Suite before, it's bets to check out the instructions manual from the official website._
 
 A)
 
@@ -20,6 +21,7 @@ A)
 * Run a new Genotyping project.
 
 B)
+
 * Select ProbeSet Summary Table
 * Select "Reanalyze"
 * Select "Regenerate SNP Metrics"
@@ -27,6 +29,7 @@ B)
 * Click OK and wait for the advanced metrics to calculate
 
 C)
+
 * Click show/hide columns
 * Tick AA.meanX, AAvarX, AB.meanX, BB.meanX, and BB.varX, and n_NC
 * Click export -> current table and save the file
