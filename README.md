@@ -12,12 +12,21 @@ Visit _www.motherlandia.org_ for details.
 ## Step 1. 
 _This step involves preparing the input files in the Axiome Analysis Suite  Software._
 
-* In Axiome ANalysis Suite, start New Analysis, upload the files you want to test. Make the cr-cutoff arbitrarily low. Run a new Genotyping project.
+A)
+
+* In Axiome ANalysis Suite, start New Analysis.
+* Upload the files you want to test.
+* In threshold settings, make the cr-cutoff arbitrarily low.
+* Run a new Genotyping project.
+
+B)
 * Select ProbeSet Summary Table
 * Select "Reanalyze"
 * Select "Regenerate SNP Metrics"
 * Tick the box for "Generate advanced metrics
 * Click OK and wait for the advanced metrics to calculate
+
+C)
 * Click show/hide columns
 * Tick AA.meanX, AAvarX, AB.meanX, BB.meanX, and BB.varX, and n_NC
 * Click export -> current table and save the file
