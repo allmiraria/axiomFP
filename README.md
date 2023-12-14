@@ -32,16 +32,23 @@ C)
 
 * Click show/hide columns
 * Tick AA.meanX, AAvarX, AB.meanX, BB.meanX, and BB.varX, and n_NC (make sure to unselect everything else)
-* Click export -> current table and save the file (name the file for example "SNP_stat")
+* Click export -> current table and save the file and name it _(for example "SNP_stat")_
 
 > _This is the SNP_statistics_file.txt_
 
+D) 
+
 * Click export -> genotyping data
-* Tick "Signal"
-* Untick everything in "Select Probeset Data Columns to Include" and "Select Annotation Column(s) to Add" 
-* Save the file
+* In "Exported Data" fields tick "Signal"
+* Uncheck everything in these fields: "Select Probeset Data Columns to Include" and "Select Annotation Column(s) to Add" 
+* Insert output file name _(for example "SNP_call")_
+* Click OK. Folder where the file is saved will be automaticaly opened. 
 
 > _This is the SNP_call_contrast_positions_file.txt_
+
+E) 
+
+* Copy paste all generetaed files _"SNP_statistics_file"_ _(SNP_stat.txt)_ and _"SNP_call_contrast_positions_file"_ _(SNP_call.txt)_ to a new folder for the next step.
 
 ## Step 2. 
 _This step explains how to use the software to create **b-allele plots**_
