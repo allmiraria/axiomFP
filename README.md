@@ -31,8 +31,8 @@ B)
 C)
 
 * Click show/hide columns
-* Tick AA.meanX, AAvarX, AB.meanX, BB.meanX, and BB.varX, and n_NC
-* Click export -> current table and save the file
+* Tick AA.meanX, AAvarX, AB.meanX, BB.meanX, and BB.varX, and n_NC (make sure to unselect everything else)
+* Click export -> current table and save the file (name the file for example "SNP_stat")
 
 > _This is the SNP_statistics_file.txt_
 
