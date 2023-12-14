@@ -48,7 +48,7 @@ D)
 
 E) 
 
-* Copy paste all generetaed files _"SNP_statistics_file"_ _(SNP_stat.txt)_ and _"SNP_call_contrast_positions_file"_ _(SNP_call.txt)_ to a new folder for the next step.
+* Copy paste all genereated files _"SNP_statistics_file"_ _(SNP_stat.txt)_ and _"SNP_call_contrast_positions_file"_ _(SNP_call.txt)_ to a new folder for the next step.
 
 ## Step 2. 
 _This step explains how to use the software to create **b-allele plots**_
