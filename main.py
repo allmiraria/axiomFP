@@ -2,7 +2,7 @@ import os, sys, pathlib, pandas, typer, argparse, tqdm.auto, matplotlib.pyplot a
 
 # Argument parsing:
 parser = argparse.ArgumentParser(description='Argument parser for b_alelle_plot. Računa nešta...')
-parser.add_argument('snp_stat', type=str, help='SNP Statistics file, pa ga opišeš...')
+parser.add_argument('snp_stat', type=str, help='SNP Statistics file, contains...')
 parser.add_argument('snp_ccp', type=str, help='SNP Call Contrast Positions file, pa ga opišeš...')
 parser.add_argument('output_folder', type=str, help='Output folder for histograms.')
 args = parser.parse_args()
