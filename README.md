@@ -1,5 +1,5 @@
-# b_allele_plot
-A software for generating b allele plots from Axiom data.
+# axiomFP (axiom frequency plot)
+A software for generating frequency plots from Axiom data.
 
 _(Requires input files generated in Axiom Analysis Suite Software)_
 
@@ -67,7 +67,7 @@ This is how to run the software. "output" is the name of the newly generated fol
 
 For help run:
 
-`python main.py -h`
+`python axiomFP.py -h`
 
 
 
