@@ -66,6 +66,7 @@ demo_filtered_df.drop(columns=['n_NC', 'AA.meanX', 'AA.varX', 'AB.meanX', 'BB.me
 os.makedirs(args.output_folder, exist_ok=True)
 typer.secho('Generating column histograms.', fg=typer.colors.GREEN)
 for column in tqdm.auto.tqdm(demo_filtered_df.columns, desc='Generating histograms'):
+    plt.figure(figsize=(12, 10))
     plt.hist(demo_filtered_df[column], bins=160, edgecolor='black')
     #plt.xlabel(column)
     plt.xticks([])
