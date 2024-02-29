@@ -1,15 +1,15 @@
 import os, sys, pathlib, pandas, typer, argparse, tqdm.auto, matplotlib.pyplot as plt
 
 # Argument parsing:
-parser = argparse.ArgumentParser(description='Argument parser for b_alelle_plot. Računa nešta...')
-parser.add_argument('snp_stat', type=str, help='SNP Statistics file, contains...')
-parser.add_argument('snp_ccp', type=str, help='SNP Call Contrast Positions file, pa ga opišeš...')
+parser = argparse.ArgumentParser(description='Argument parser for axiom frequency plot.')
+parser.add_argument('snp_stat', type=str, help='SNP Statistics file')
+parser.add_argument('snp_ccp', type=str, help='SNP Call Contrast Positions file')
 parser.add_argument('output_folder', type=str, help='Output folder for histograms.')
 args = parser.parse_args()
 
 # b_alelle_plot intro:
 os.system('cls' if os.name == 'nt' else 'clear')
-typer.secho('b_alelle_plot')
+typer.secho('axiomFP')
 
 # Loading files:
 typer.secho('Loading files...')
@@ -68,6 +68,7 @@ typer.secho('Generating column histograms.', fg=typer.colors.GREEN)
 for column in tqdm.auto.tqdm(demo_filtered_df.columns, desc='Generating histograms'):
     plt.hist(demo_filtered_df[column], bins=160, edgecolor='black')
     #plt.xlabel(column)
+    plt.xticks([])
     plt.ylabel('Frequency')
     plt.title(f'Histogram for {column}')
     output_file_path = os.path.join(args.output_folder, f'{column}_histogram.png')
