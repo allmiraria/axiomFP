@@ -75,4 +75,4 @@ for column in tqdm.auto.tqdm(demo_filtered_df.columns, desc='Generating histogra
     output_file_path = os.path.join(args.output_folder, f'{column}_histogram.png')
     plt.savefig(output_file_path, bbox_inches='tight')
     plt.clf()
-plt.close('all')
+    plt.close('all')
