@@ -31,7 +31,7 @@ B)
 C)
 
 * Click show/hide columns
-* Tick AA.meanX, AAvarX, AB.meanX, BB.meanX, and BB.varX, and n_NC (make sure to unselect everything else)
+* Tick AA.meanX, AAvarX, AB.meanX, BB.meanX, and BB.varX, and n_NC
 * Click export -> current table and save the file and name it _(for example "SNP_stat")_
 
 > _This is the SNP_statistics_file.txt_
@@ -63,7 +63,7 @@ Change directory to the created folder
 
 This is how to run the software. "output" is the name of the newly generated folder that contains b allele plots :)
 
-`python main.py SNP_statistics_file.txt SNP_call_contrast_positions_file.txt output`
+`python axiomFP.py SNP_statistics_file.txt SNP_call_contrast_positions_file.txt output`
 
 For help run:
 
