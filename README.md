@@ -13,7 +13,7 @@ _In case you haven't used Axiom Analysis Suite before, it's best to check out th
 A)
 
 * In Axiome Analysis Suite, start New Analysis.
-* Upload the files you want to test.
+* Upload the .CEL files you want to test.
 * In threshold settings, make the cr-cutoff arbitrarily low.
 * Run a new Genotyping project.
 
