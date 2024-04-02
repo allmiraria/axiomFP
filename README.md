@@ -26,14 +26,14 @@ B)
 * Click OK and wait for the advanced metrics to calculate
 
 C)
-> _To generate the SNP_statistics_file.txt_
+> _To generate the SNP_statistics_file_
 > 
 * Click show/hide columns
 * Tick AA.meanX, AAvarX, AB.meanX, BB.meanX, and BB.varX, and n_NC
 * Click export -> current table and save the file and name it _(for example "SNP_stat")_
 
 D) 
-> _To generate the SNP_call_contrast_positions_file.txt_
+> _To generate the SNP_call_contrast_positions_file_
 > 
 * Click export -> genotyping data
 * In "Exported Data" fields tick "Signal"
