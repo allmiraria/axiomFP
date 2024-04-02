@@ -4,10 +4,14 @@ import os, sys, pathlib, pandas, typer, argparse, tqdm.auto, matplotlib.pyplot a
 parser = argparse.ArgumentParser(description='Argument parser for axiom frequency plot.')
 parser.add_argument('snp_stat', type=str, help='SNP Statistics file')
 parser.add_argument('snp_ccp', type=str, help='SNP Call Contrast Positions file')
+parser.add_argument('--nnc', type=int, default=20, help='Cutoff value for number of calls.')
 parser.add_argument('output_folder', type=str, help='Output folder for histograms.')
 args = parser.parse_args()
 
-# b_alelle_plot intro:
+# Accessing the value of the 'nnc' argument from the parsed arguments
+cutoff_value = args.nnc
+
+# axiom_FP intro:
 os.system('cls' if os.name == 'nt' else 'clear')
 typer.secho('axiomFP')
 
@@ -42,9 +46,9 @@ for column_name in tqdm.auto.tqdm(snp_call_contrast_positions_df.columns, desc='
         else:
             snp_call_contrast_positions_df.drop(column_name, axis=1, inplace=True)
 demo_df = pandas.merge(snp_call_contrast_positions_df, snp_statistics_df, on=['probeset_id'], how='inner')
-typer.secho('Removing rows where n_NC > 20.', fg=typer.colors.GREEN)
+typer.secho('Removing rows with high call rates.', fg=typer.colors.GREEN)
 for index, row in tqdm.auto.tqdm(demo_df.iterrows(), total=demo_df.shape[0], desc='Removing rows'):
-    if row['n_NC'] >= 20:
+    if row['n_NC'] >= cutoff_value:
         demo_df.drop(index, inplace=True)
 demo_df.reset_index(drop=True, inplace=True)
 aa_meanx_min_value = demo_df['AA.meanX'].min()
@@ -61,15 +65,22 @@ demo_filtered_df = pandas.DataFrame(columns=demo_df.columns)
 typer.secho('Removing rows where AA.meanX and BB.meanX difference is smaller than average...', fg=typer.colors.GREEN)
 for index, row in tqdm.auto.tqdm(demo_df.iterrows(), total=demo_df.shape[0], desc='Removing AA-BB < aa-bb'):
     if row['AA-BB'] > aa_bb:
+         if -0.5 <= row['AB.meanX'] <= 0.5:
         demo_filtered_df.loc[len(demo_filtered_df)] = row
-demo_filtered_df.drop(columns=['n_NC', 'AA.meanX', 'AA.varX', 'AB.meanX', 'BB.meanX', 'BB.varX', 'AA-BB', 'probeset_id'], inplace=True)
+typer.secho('Removing rows where AB.meanX is outside the range [-0.5, 0.5]...', fg=typer.colors.GREEN)
+demo_filtered_df = demo_filtered_df[(demo_filtered_df['AB.meanX'] >= -0.5) & (demo_filtered_df['AB.meanX'] <= 0.5)]
+# Drop specified columns
+columns_to_drop = ['n_NC', 'AA.meanX', 'AA.varX', 'AB.meanX', 'BB.meanX', 'BB.varX', 'AA-BB', 'probeset_id']
+demo_filtered_df.drop(columns=columns_to_drop, inplace=True)
+# Set DPI for the plot
+plt.rcParams['savefig.dpi'] = 400
+#Create output folder
 os.makedirs(args.output_folder, exist_ok=True)
 typer.secho('Generating column histograms.', fg=typer.colors.GREEN)
 for column in tqdm.auto.tqdm(demo_filtered_df.columns, desc='Generating histograms'):
-    plt.figure(figsize=(12, 10))
     plt.hist(demo_filtered_df[column], bins=160, edgecolor='black')
-    #plt.xlabel(column)
-    plt.xticks([])
+    plt.xlabel(column)
+    #plt.xticks([])
     plt.ylabel('Frequency')
     plt.title(f'Histogram for {column}')
     output_file_path = os.path.join(args.output_folder, f'{column}_histogram.png')
