@@ -67,10 +67,3 @@ For help run:
 `python axiomFP.py -h`
 
 For any additional questions or issues feel free to leave a comment.
-
-
-
-
-Visit _www.motherlandia.org_ for details.
-
-
