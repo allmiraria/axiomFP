@@ -31,15 +31,16 @@ C)
 * Click show/hide columns
 * Tick AA.meanX, AB.meanX, BB.meanX, and n_NC
 * Click export -> current table and save the file and name it _(for example "SNP_stat")_
+*  Click OK. Folder where the file is saved will be automaticaly opened. 
 
 D) 
 > _To generate the SNP_call_contrast_positions_file_
 > 
 * Click export -> genotyping data
-* In "Exported Data" fields tick "Signal"
+* In "Exported Data" field tick "Signal"
 * Uncheck everything in these fields: "Select Probeset Data Columns to Include" and "Select Annotation Column(s) to Add" 
 * Insert output file name _(for example "SNP_call")_
-* Click OK. Folder where the file is saved will be automaticaly opened. 
+* Make sure to choose the destination folder for your file in the "Output files" field.
 
 E) 
 
