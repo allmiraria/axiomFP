@@ -57,7 +57,7 @@ Change directory to the created folder
  
 `cd axiom_FP`
 
-This is how to run the software. "output" is the name of the newly generated folder that contains b allele plots :)
+This is how to run the software. "output" is the name of the newly generated folder that contains the newly generated plots
 
 `python axiomFP.py SNP_statistics_file.txt SNP_call_contrast_positions_file.txt output`
 
