@@ -66,11 +66,12 @@ typer.secho('Removing rows where AA.meanX and BB.meanX difference is smaller tha
 for index, row in tqdm.auto.tqdm(demo_df.iterrows(), total=demo_df.shape[0], desc='Removing AA-BB < aa-bb'):
     if row['AA-BB'] > aa_bb:
          if -0.5 <= row['AB.meanX'] <= 0.5:
-        demo_filtered_df.loc[len(demo_filtered_df)] = row
+            # If both conditions are met, add the row to demo_filtered_df
+            demo_filtered_df.loc[len(demo_filtered_df)] = row
 typer.secho('Removing rows where AB.meanX is outside the range [-0.5, 0.5]...', fg=typer.colors.GREEN)
 demo_filtered_df = demo_filtered_df[(demo_filtered_df['AB.meanX'] >= -0.5) & (demo_filtered_df['AB.meanX'] <= 0.5)]
 # Drop specified columns
-columns_to_drop = ['n_NC', 'AA.meanX', 'AA.varX', 'AB.meanX', 'BB.meanX', 'BB.varX', 'AA-BB', 'probeset_id']
+columns_to_drop = ['n_NC', 'AA.meanX', 'AB.meanX', 'BB.meanX', 'AA-BB', 'probeset_id']
 demo_filtered_df.drop(columns=columns_to_drop, inplace=True)
 # Set DPI for the plot
 plt.rcParams['savefig.dpi'] = 400
