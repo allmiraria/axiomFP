@@ -29,7 +29,7 @@ C)
 > _To generate the SNP_statistics_file_
 > 
 * Click show/hide columns
-* Tick AA.meanX, AB.meanX, BB.meanX, and n_NC
+* Tick AA.meanX, AB.meanX, BB.meanX, and n_NC (make sure to untick everything else)
 * Click export -> current table and save the file and name it _(for example "SNP_stat")_
 *  Click OK. Folder where the file is saved will be automaticaly opened. 
 
