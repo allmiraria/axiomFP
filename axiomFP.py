@@ -5,7 +5,7 @@ parser = argparse.ArgumentParser(description='Argument parser for axiom frequenc
 parser.add_argument('snp_stat', type=str, help='SNP Statistics file')
 parser.add_argument('snp_ccp', type=str, help='SNP Call Contrast Positions file')
 parser.add_argument('--nnc', type=int, default=20, help='Cutoff value for number of calls.')
-parser.add_argument('output_folder', type=str, help='Output folder for histograms.')
+parser.add_argument('--output', type=str, required=True, help='Output folder for histograms.')
 args = parser.parse_args()
 
 # Accessing the value of the 'nnc' argument from the parsed arguments
