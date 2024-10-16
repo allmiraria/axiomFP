@@ -59,7 +59,7 @@ Change directory to the created folder
 
 This is how to run the software. "output" is the name of the newly generated folder that contains the newly generated plots
 
-`python axiomFP.py SNP_statistics_file.txt SNP_call_contrast_positions_file.txt --output (insert output folder name)`
+`python axiomFP.py SNP_statistics_file.txt SNP_call_contrast_positions_file.txt output 
 
 _(*depending on the operating system, command ‘python’ may need to be replaced by the python version installed e.g python3)_
 
