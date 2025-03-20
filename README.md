@@ -63,6 +63,11 @@ This is how to run the software. "output" is the name of the newly generated fol
 
 _(*depending on the operating system, command ‘python’ may need to be replaced by the python version installed e.g python3)_
 
+The deafult threshold for missing call rates is 20. If you want to define this valuse use function: --nnc
+For example: if we want to set the cut off rate at 60 
+
+`python axiomFP.py SNP_statistics_file.txt SNP_call_contrast_positions_file.txt --nnc 60 output 
+
 For help run:
 
 `python axiomFP.py -h`
