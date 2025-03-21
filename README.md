@@ -6,6 +6,18 @@ _(Requires input files generated in Axiom Analysis Suite Software)_
 # what's new
 ..Added the option to define the cutoff value for number of calls
 
+## Required Python Libraries 
+os (built-in, no installation required)
+sys (built-in, no installation required)
+pathlib (built-in, no installation required)
+argparse (built-in, no installation required)
+pandas
+typer
+tqdm
+matplotlib
+_Install using the following code_
+* pip3 install pandas typer tqdm matplotlib 
+
 ## Step 1. 
 _This step involves preparing the input files in the Axiome Analysis Suite  Software._
 _In case you haven't used Axiom Analysis Suite before, it's best to check out the instructions manual from the official website._
