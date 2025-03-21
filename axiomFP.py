@@ -49,7 +49,7 @@ demo_df = pandas.merge(snp_call_contrast_positions_df, snp_statistics_df, on=['p
 
 demo_df_rows_no1 = demo_df.shape[0]
 
-typer.secho('Applying Filtering parameter 1).', fg=typer.colors.GREEN)
+typer.secho('Applying Filtering parameter 1.', fg=typer.colors.GREEN)
 for index, row in tqdm.auto.tqdm(demo_df.iterrows(), total=demo_df.shape[0], desc='Removing SNPs'):
     if row['n_NC'] >= cutoff_value:
         demo_df.drop(index, inplace=True)
@@ -82,7 +82,7 @@ for index, row in tqdm.auto.tqdm(demo_df.iterrows(), total=demo_df.shape[0], des
 demo_filtered_df_rows_no2 = demo_filtered_df.shape[0]
 typer.secho(f'Filtering parameter 2 - SNPs removed: {abs(demo_filtered_df_rows_no1 - demo_filtered_df_rows_no2)}', fg=typer.colors.GREEN)
 
-typer.secho('Applying Filtering parameter 3', fg=typer.colors.GREEN)
+typer.secho('Applying Filtering parameter 3.', fg=typer.colors.GREEN)
 demo_filtered_df = demo_filtered_df[(demo_filtered_df['AB.meanX'] >= -0.5) & (demo_filtered_df['AB.meanX'] <= 0.5)]
 
 demo_filtered_df_rows_no3 = demo_filtered_df.shape[0]
