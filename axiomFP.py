@@ -46,8 +46,13 @@ for column_name in tqdm.auto.tqdm(snp_call_contrast_positions_df.columns, desc='
         else:
             snp_call_contrast_positions_df.drop(column_name, axis=1, inplace=True)
 demo_df = pandas.merge(snp_call_contrast_positions_df, snp_statistics_df, on=['probeset_id'], how='inner')
-typer.secho('Removing rows with high call rates.', fg=typer.colors.GREEN)
-for index, row in tqdm.auto.tqdm(demo_df.iterrows(), total=demo_df.shape[0], desc='Removing rows'):
+
+# DODATO r
+demo_df_rows_no1 = demo_df.shape[0]
+###
+
+typer.secho('Applying Filtering parameter 1).', fg=typer.colors.GREEN)
+for index, row in tqdm.auto.tqdm(demo_df.iterrows(), total=demo_df.shape[0], desc='Removing SNPs'):
     if row['n_NC'] >= cutoff_value:
         demo_df.drop(index, inplace=True)
 demo_df.reset_index(drop=True, inplace=True)
@@ -58,18 +63,41 @@ bb_meanx_max_value = demo_df['BB.meanX'].max()
 aa_meanx_delta = abs(aa_meanx_max_value) - aa_meanx_min_value
 bb_meanx_delta = abs(bb_meanx_max_value) - bb_meanx_min_value
 aa_bb = (aa_meanx_delta + bb_meanx_delta) / 2
-typer.secho('Calculating AA.meanX and BB.meanX difference.', fg=typer.colors.GREEN)
+
+# DODATO r
+demo_df_rows_no2 = demo_df.shape[0]
+typer.secho(f'Filtering parameter 1 - SNPs removed: {abs(demo_df_rows_no1 - demo_df_rows_no2)}', fg=typer.colors.GREEN)
+###
+
+typer.secho('Calculating Filtering parameter 2.', fg=typer.colors.GREEN)
 for index, row in tqdm.auto.tqdm(demo_df.iterrows(), total=demo_df.shape[0], desc='Calculating AA-BB column'):
     demo_df.at[index, 'AA-BB'] = demo_df.at[index, 'AA.meanX'] - demo_df.at[index, 'BB.meanX']
 demo_filtered_df = pandas.DataFrame(columns=demo_df.columns)
-typer.secho('Removing rows where AA.meanX and BB.meanX difference is smaller than average...', fg=typer.colors.GREEN)
+
+# DODATO r
+demo_filtered_df_rows_no1 = demo_filtered_df.shape[0]
+###
+
+typer.secho('Applying Filtering parameter 2', fg=typer.colors.GREEN)
 for index, row in tqdm.auto.tqdm(demo_df.iterrows(), total=demo_df.shape[0], desc='Removing AA-BB < aa-bb'):
     if row['AA-BB'] > aa_bb:
          if -0.5 <= row['AB.meanX'] <= 0.5:
             # If both conditions are met, add the row to demo_filtered_df
             demo_filtered_df.loc[len(demo_filtered_df)] = row
-typer.secho('Removing rows where AB.meanX is outside the range [-0.5, 0.5]...', fg=typer.colors.GREEN)
+            
+# DODATO r
+demo_filtered_df_rows_no2 = demo_filtered_df.shape[0]
+typer.secho(f'Filtering parameter 2 - SNPs removed: {abs(demo_filtered_df_rows_no1 - demo_filtered_df_rows_no2)}', fg=typer.colors.GREEN)
+###
+
+typer.secho('Applying Filtering parameter 3', fg=typer.colors.GREEN)
 demo_filtered_df = demo_filtered_df[(demo_filtered_df['AB.meanX'] >= -0.5) & (demo_filtered_df['AB.meanX'] <= 0.5)]
+
+# DODATO r
+demo_filtered_df_rows_no3 = demo_filtered_df.shape[0]
+typer.secho(f'Filtering parameter 3 - SNPs removed: {abs(demo_filtered_df_rows_no2 - demo_filtered_df_rows_no3)}', fg=typer.colors.GREEN)
+###
+
 # Drop specified columns
 columns_to_drop = ['n_NC', 'AA.meanX', 'AB.meanX', 'BB.meanX', 'AA-BB', 'probeset_id']
 demo_filtered_df.drop(columns=columns_to_drop, inplace=True)
@@ -80,9 +108,8 @@ os.makedirs(args.output_folder, exist_ok=True)
 typer.secho('Generating column histograms.', fg=typer.colors.GREEN)
 for column in tqdm.auto.tqdm(demo_filtered_df.columns, desc='Generating histograms'):
     plt.hist(demo_filtered_df[column], bins=160, edgecolor='black')
-    plt.xlabel(column)
-    #plt.xticks([])
-    plt.ylabel('Frequency')
+    plt.xlabel('Normalized X axis postions')
+    plt.ylabel('Number of SNPs')
     plt.title(f'Histogram for {column}')
     output_file_path = os.path.join(args.output_folder, f'{column}_histogram.png')
     plt.savefig(output_file_path, bbox_inches='tight')
