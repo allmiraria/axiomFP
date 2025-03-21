@@ -17,7 +17,7 @@ _(Requires input files generated in Axiom Analysis Suite Software)_
 *  matplotlib
 _Install using the following code_
 
-`_pip3 install pandas typer tqdm matplotlib_
+_pip3 install pandas typer tqdm matplotlib_
 
 ## Step 1. 
 _This step involves preparing the input files in the Axiome Analysis Suite  Software._
