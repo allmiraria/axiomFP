@@ -47,9 +47,7 @@ for column_name in tqdm.auto.tqdm(snp_call_contrast_positions_df.columns, desc='
             snp_call_contrast_positions_df.drop(column_name, axis=1, inplace=True)
 demo_df = pandas.merge(snp_call_contrast_positions_df, snp_statistics_df, on=['probeset_id'], how='inner')
 
-# DODATO r
 demo_df_rows_no1 = demo_df.shape[0]
-###
 
 typer.secho('Applying Filtering parameter 1).', fg=typer.colors.GREEN)
 for index, row in tqdm.auto.tqdm(demo_df.iterrows(), total=demo_df.shape[0], desc='Removing SNPs'):
@@ -64,19 +62,15 @@ aa_meanx_delta = abs(aa_meanx_max_value) - aa_meanx_min_value
 bb_meanx_delta = abs(bb_meanx_max_value) - bb_meanx_min_value
 aa_bb = (aa_meanx_delta + bb_meanx_delta) / 2
 
-# DODATO r
 demo_df_rows_no2 = demo_df.shape[0]
 typer.secho(f'Filtering parameter 1 - SNPs removed: {abs(demo_df_rows_no1 - demo_df_rows_no2)}', fg=typer.colors.GREEN)
-###
 
 typer.secho('Calculating Filtering parameter 2.', fg=typer.colors.GREEN)
 for index, row in tqdm.auto.tqdm(demo_df.iterrows(), total=demo_df.shape[0], desc='Calculating AA-BB column'):
     demo_df.at[index, 'AA-BB'] = demo_df.at[index, 'AA.meanX'] - demo_df.at[index, 'BB.meanX']
 demo_filtered_df = pandas.DataFrame(columns=demo_df.columns)
 
-# DODATO r
 demo_filtered_df_rows_no1 = demo_filtered_df.shape[0]
-###
 
 typer.secho('Applying Filtering parameter 2', fg=typer.colors.GREEN)
 for index, row in tqdm.auto.tqdm(demo_df.iterrows(), total=demo_df.shape[0], desc='Removing AA-BB < aa-bb'):
@@ -85,18 +79,14 @@ for index, row in tqdm.auto.tqdm(demo_df.iterrows(), total=demo_df.shape[0], des
             # If both conditions are met, add the row to demo_filtered_df
             demo_filtered_df.loc[len(demo_filtered_df)] = row
             
-# DODATO r
 demo_filtered_df_rows_no2 = demo_filtered_df.shape[0]
 typer.secho(f'Filtering parameter 2 - SNPs removed: {abs(demo_filtered_df_rows_no1 - demo_filtered_df_rows_no2)}', fg=typer.colors.GREEN)
-###
 
 typer.secho('Applying Filtering parameter 3', fg=typer.colors.GREEN)
 demo_filtered_df = demo_filtered_df[(demo_filtered_df['AB.meanX'] >= -0.5) & (demo_filtered_df['AB.meanX'] <= 0.5)]
 
-# DODATO r
 demo_filtered_df_rows_no3 = demo_filtered_df.shape[0]
 typer.secho(f'Filtering parameter 3 - SNPs removed: {abs(demo_filtered_df_rows_no2 - demo_filtered_df_rows_no3)}', fg=typer.colors.GREEN)
-###
 
 # Drop specified columns
 columns_to_drop = ['n_NC', 'AA.meanX', 'AB.meanX', 'BB.meanX', 'AA-BB', 'probeset_id']
